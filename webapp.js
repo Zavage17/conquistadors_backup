@@ -1,0 +1,363 @@
+
+ //global variables
+ //rescources
+var metal = 0;
+var wires = 0;
+var food = 20;
+var minerals = 0;
+var water = 10;
+var cc = 0;
+var o2 = 5;
+var mesh = 0;
+//tools
+var space = 0;
+var solar = 0;
+var gas =0;
+var drill = 0;
+var well = 0;
+var farm = 0;
+var bp = 0;
+
+
+
+window.onload = onLoadHandler;
+
+function onLoadHandler() {
+	// load_cookies();
+	update();
+}
+
+function coolDown(btn_id, sec) {
+	document.getElementById(btn_id).disabled = true;
+	setTimeout(function() {
+		document.getElementById(btn_id).disabled = false;
+	}, sec);
+}
+
+    //add clicker for resource
+function scavenge() {
+	coolDown("scavenge", 45000);
+	var rnd = Math.ceil(Math.random() * 7);
+    switch(rnd) {
+        
+        case 1: // metal
+            metal+=3;
+            break;
+            
+        case 2: // wires
+            wires+=3;
+            break;
+            
+        case 3: // food
+            food+=1;
+            break;
+            
+        case 4: // minerals
+            minerals+=2;         
+            break;
+            
+        case 5: // water
+            water+=1;                    
+            break;
+            
+        case 6: // cc
+            cc+=1;                        
+            break;
+            
+        case 7: // o2
+            o2+=1;
+            break;
+    
+    }
+	update();
+}
+
+//shop start
+
+
+function update() {
+	document.getElementById("metal").value = metal;
+	document.getElementById("space").value = space;
+	document.getElementById("drill").value = drill;
+	document.getElementById("well").value = well;
+	document.getElementById("farm").value = farm;
+	document.getElementById("bp").value = bp;
+	document.getElementById("gas").value = gas;
+    document.getElementById("wires").value = wires;
+    document.getElementById("o2").value = o2;     
+	document.getElementById("metal").value = metal; 
+	document.getElementById("food").value = food;     
+	document.getElementById("water").value = water;    
+	document.getElementById("minerals").value = minerals;   
+	document.getElementById("cc").value = cc;
+	document.getElementById("mesh").value = mesh;
+	document.getElementById("solar").value = solar;
+}
+
+function shop(sel) {
+    switch(sel) {
+		
+        case "Cdrill":
+            alert("trying to build a DRILL...");
+			alert("metal:" + metal);
+			if( metal >= 10 ) {
+               metal-=10;
+				drill++;
+				update();
+				alert("successful!");
+				document.getElementById("drillImage").hidden = false;
+				
+				}
+			else {
+				alert("COMPUTER: Error, 10 metal required.");
+			}
+			break;
+			
+			
+			
+			
+			
+			 case "Cspace":
+            alert("trying to build a SPACESHIP...");
+			alert( "Metal:" + metal + " Wires:" + wires + " Solar Panels:" + solar + " Food:" + food + " Water:" + water + " Oxygen Tanks:" + o2 + " Computer Chips:" + cc);
+			if( metal >= 200 && cc >= 20 && wires >= 100 && solar >= 50 && food >= 20 && water >= 20 && o2 >= 10 ) {
+				space++;
+		food=20;
+		o2=5;
+		water=10;
+		metal=0;
+		wires=0;
+		minerals=0;
+		cc=0;
+		mesh=0;
+		well=0;
+		farm=0;
+		bp=0;
+		gas=0;
+		solar=0;
+		drill=0;
+				update();
+				alert("Congratualions! you made a spaceship and flew back to the planet you came from (who thought you were long dead) being known as the lone survivor.");
+				document.getElementById("drillImage").hidden = false;
+				
+				}
+			else {
+				alert("COMPUTER: Error, 200 metal, 20 computer chips, 100 solar panels, 50 food, 20 water, and 10 oxygen tanks required.");
+			}
+			break;
+			
+			
+			
+			
+			
+		    case "Cwell":
+            alert("trying to build a WATER FILTER...");
+			alert("minerals:" + minerals + " drills:" + drill + " mesh:" + mesh);
+			if( minerals >= 9 && drill >= 1 && mesh >= 3 ) {
+                minerals-=10;
+				mesh-=3;
+				well++;
+				update();
+				alert("successful!");
+				}
+			else {
+				alert("COMPUTER: Error, 10 minerals, 3 mesh, and 1 drill required.");
+			}
+			break;
+			
+			
+			
+			case "Cfarm":
+            alert("trying to build an AUTOMATED FARM...");
+			alert("mesh:" + mesh + " Computer chips:" + cc + " wires:" + wires + " wells:" + well + " Solar Panels:" + solar );
+			if( mesh >= 10 && cc >= 2 && wires >= 5 && well >= 1 && solar >= 1 ) {
+               mesh-=10;
+				cc-=2;
+				solar-=1;
+				wires-=5;
+				farm++;
+				update();
+				alert("successful!");
+				document.getElementById("farmimage").hidden = false;
+			}
+			else {
+				alert("COMPUTER: Error, 10 mesh, 2 computer chips, 1 well, 1 solar panel, and 5 wires required.");
+			}
+			break;
+			
+			
+			
+			
+			case "Cgas":
+            alert("trying to build a GAS COMPOUNDER...");
+			alert("metal:" + metal + " wires:" + wires + " minerals:" + minerals + " oxygen tanks:" + o2 );
+			if( metal >= 10 && wires >= 15 && o2 >= 2 && minerals >=11 ) {
+               metal-=10;
+			    wires-=15;
+				o2-=2;
+				minerals-=11;
+				gas++;
+				update();
+				alert("successful!");
+				document.getElementById("gasImage").hidden = false;
+				}
+			else {
+				alert("COMPUTER: Error, 10 metal, 15 wires, 2 oxygen tanks, and 11 minerals required.");
+			}
+			break;
+			
+			
+			
+			case "Cbp":
+            alert("trying to build a BLUE PRINTER...");
+			alert("metal:" + metal + " wires:" + wires + " computer ships:" + cc + " Solar Panels:" +solar );
+			if( metal >= 10 && wires >= 30 && cc >= 5 && solar >=1 ) {
+               metal-=10;
+			    wires-=30;
+		 	    cc-=5;
+				bp++;
+				update();
+				alert("successful!");
+				document.getElementById("bpImage").hidden = false;
+				}
+			else {
+				alert("COMPUTER: Error, 10 metal, 20 sires, 1 solar panel, and 5 computer chips required.");
+			}
+			break;
+			
+			
+			
+			case "Cmesh":
+            alert("trying to make MESH...");
+			alert("metal:" + metal + " wires:" + wires );
+			if( metal >= 3 && wires >=4 ) {
+               metal-=3;
+			    wires-=4;
+				mesh+=2;
+				update();
+				alert("successful!");
+				}
+			else {
+				alert("COMPUTER: Error, 3 metal and 4 wires required.");
+			}
+			break;
+			
+			
+			
+			case "Csolar":
+            alert("trying to build a SOLAR PANEL...");
+			alert("metal:" + metal + " mesh:" + mesh + " wires:" + wires);
+			if( metal >= 2 && mesh >= 2 && wires >= 5 ) {
+               wires-= 5;
+				mesh-=2;
+				metal-=2;
+				solar++;
+				update();
+				alert("successful!");
+				}
+			else {
+				alert("COMPUTER: Error, 10 minerals, 3 mesh, and 1 drill required.");
+			}
+			break;
+	}
+}
+
+
+setInterval(function() {
+    bonusCalc();
+},60000);
+
+function bonusCalc() {
+	// drills
+   var drillBonus = 0;
+   drillBonus += drill * 3;
+   metal += drillBonus;
+    var mineralBonus = 0;
+   mineralBonus += drill * 1;
+   minerals += mineralBonus;
+   // water filters
+   var waterBonus = 0;
+   waterBonus += well * 2;
+   water += waterBonus;
+   // farm
+   var farmBonus = 0;
+   farmBonus += farm *2;
+   food += farmBonus;
+   // bp
+   var bpBonus = 0;
+   bpBonus += bp * 1;
+   cc += bpBonus;
+   var gasBonus = 0;
+   gasBonus += gas * 1;
+   o2 += gasBonus ;
+   update();
+}
+//shop end
+
+//supply deplete
+setInterval(decay,300000);
+function decay() {
+  water-=Math.ceil(Math.random()*3);
+  o2-=1;
+  food-=Math.ceil(Math.random()*5);
+  update();
+}
+
+
+function death() { 
+	if (food <= 0) {
+		alert("You starved to death");
+		food=20;
+		o2=5;
+		water=10;
+		metal=0;
+		wires=0;
+		minerals=0;
+		cc=0;
+		mesh=0;
+		well=0;
+		farm=0;
+		bp=0;
+		gas=0;
+		solar=0;
+		drill=0;
+		update();
+	}
+	if (water <= 0) {
+		alert("You died from de-hydration");
+		food=20;
+		o2=5;
+		water=10;
+		metal=0;
+		wires=0;
+		minerals=0;
+		cc=0;
+		mesh=0;
+		well=0;
+		farm=0;
+		bp=0;
+		gas=0;
+		solar=0;
+		drill=0;
+		update();
+	}
+	if(o2 <= 0) {
+		alert("You suffocated to death");
+		food=20;
+		o2=5;
+		water=10;
+		metal=0;
+		wires=0;
+		minerals=0;
+		cc=0;
+		mesh=0;
+		well=0;
+		farm=0;
+		bp=0;
+		gas=0;
+		solar=0;
+		drill=0;
+		update();
+	}
+	update();
+}
